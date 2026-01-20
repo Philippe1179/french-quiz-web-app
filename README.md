@@ -34,10 +34,10 @@ The app presents simple French quiz questions and provides immediate feedback to
 4. **Open the app in your browser**  
    Go to: `http://localhost:5173`
 
-## Purpose:
+## Purpose
 - This project was built to practice front-end development using React and to explore interactive ways of supporting French language learning.
 
-## Future Improvements:
+## Future Improvements
 - Add more quiz questions
 - Track user scores
 - Add difficulty levels

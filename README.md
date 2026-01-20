@@ -1,12 +1,49 @@
-# React + Vite
+# French Quiz Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a small React-based web application designed to help English speakers practice basic French vocabulary through an interactive quiz.
 
-Currently, two official plugins are available:
+## Overview
+The app presents simple French quiz questions and provides immediate feedback to help users reinforce vocabulary and comprehension. It is lightweight, beginner-friendly, and easy to run locally.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Interactive French vocabulary quiz
+- Immediate feedback on answers
+- Clean and simple user interface
+- Beginner-focused content
 
-## Expanding the ESLint configuration
+## Tech Stack
+- React
+- JavaScript
+- HTML
+- CSS
+- Vite
+- npm
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## How to Run the App
+
+1. **Clone the repository**  
+   `git clone https://github.com/Philippe1179/french-quiz-web-app.git`  
+   `cd french-quiz-web-app`
+
+2. **Install dependencies**  
+   `npm install`
+
+3. **Start the development server**  
+   `npm run dev`
+
+4. **Open the app in your browser**  
+   Go to: `http://localhost:5173`
+
+## Purpose:
+- This project was built to practice front-end development using React and to explore interactive ways of supporting French language learning.
+
+## Future Improvements:
+- Add more quiz questions
+- Track user scores
+- Add difficulty levels
+- Improve mobile responsiveness
+
+
+
+
+

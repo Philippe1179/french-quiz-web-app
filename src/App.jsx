@@ -1,35 +1,23 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import QuestionCard from './QuestionCard.jsx'
+import allQuestions from './data/questions.js'
 
-const questions = [
-  {
-    question: "What is the French word for 'apple'?",
-    image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg",
-    options: ["pomme", "banane", "orange", "raisin"],
-    answer: "pomme",
-  },
-  {
-    question: "How do you say 'thank you' in French?",
-    options: ["merci", "bonjour", "au revoir", "s'il vous plaît"],
-    answer: "merci",
-  },
-  {
-    question: "What does 'chat' mean in English?",
-    options: ["dog", "cat", "bird", "fish"],
-    answer: "cat",
-  },
-  {
-    question: "How do you say 'good night' in French?",
-    options: ["bonne nuit", "bonsoir", "bonjour", "salut"],
-    answer: "bonne nuit",
-  },
-  {
-    question: "What is the French word for 'book'?",
-    options: ["stylo", "livre", "chaise", "table"],
-    answer: "livre",
-  },
-];
+function shuffleArray(arr) {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+function getShuffledQuestions() {
+  return shuffleArray(allQuestions).map((q) => ({
+    ...q,
+    options: shuffleArray(q.options),
+  }));
+}
 
 export default function App() {
   const [current, setCurrent] = useState(0);
@@ -41,6 +29,7 @@ export default function App() {
   const [answerStatus, setAnswerStatus] = useState(null);
   const [incorrectOptions, setIncorrectOptions] = useState([]);
   const [isFirstTry, setIsFirstTry] = useState(true);
+  const [shuffledQuestions, setShuffledQuestions] = useState(() => getShuffledQuestions());
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
@@ -53,7 +42,7 @@ export default function App() {
   function handleAnswer(option) {
     if (disableOptions) return;
     setSelectedOption(option);
-    if (option === questions[current].answer) {
+    if (option === shuffledQuestions[current].answer) {
       if (isFirstTry) {
         setScore(score + 1);
       }
@@ -66,7 +55,7 @@ export default function App() {
         setIncorrectOptions([]);
         setIsFirstTry(true);
         const next = current + 1;
-        if (next < questions.length) {
+        if (next < shuffledQuestions.length) {
           setCurrent(next);
           setFeedback("");
           setDisableOptions(false);
@@ -98,9 +87,10 @@ export default function App() {
     setAnswerStatus(null);
     setIncorrectOptions([]);
     setIsFirstTry(true);
+    setShuffledQuestions(getShuffledQuestions());
   }
 
-  const progress = (current / questions.length) * 100;
+  const progress = (current / shuffledQuestions.length) * 100;
 
   return (
     <div className="app">
@@ -126,7 +116,7 @@ export default function App() {
             <div className="progress-bar-track">
               <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
             </div>
-            <p className="progress-label">Question {current + 1} of {questions.length}</p>
+            <p className="progress-label">Question {current + 1} of {shuffledQuestions.length}</p>
           </div>
         )}
 
@@ -135,7 +125,7 @@ export default function App() {
             <h2 className="results-title">Quiz Complete!</h2>
             <p className="results-score">
               You scored <span className="score-highlight">{score}</span> out of{' '}
-              <span className="score-highlight">{questions.length}</span>
+              <span className="score-highlight">{shuffledQuestions.length}</span>
             </p>
             <button className="play-again-btn" onClick={restartQuiz}>
               Play Again
@@ -143,10 +133,8 @@ export default function App() {
           </div>
         ) : (
           <QuestionCard
-            question={questions[current].question}
-            image={questions[current].image}
-            video={questions[current].video}
-            options={questions[current].options}
+            question={shuffledQuestions[current].question}
+            options={shuffledQuestions[current].options}
             selectedOption={selectedOption}
             answerStatus={answerStatus}
             incorrectOptions={incorrectOptions}

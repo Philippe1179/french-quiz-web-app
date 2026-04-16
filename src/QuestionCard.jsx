@@ -10,13 +10,14 @@ export default function QuestionCard({
   disableOptions,
   handleAnswer,
   feedback,
-  onRestart,
 }) {
   return (
     <div>
-      <h2>{question}</h2>
+      <h2 className="question-text">{question}</h2>
+
       {youtube && (
         <iframe
+          className="media"
           width="100%"
           height="200"
           src={youtube}
@@ -24,59 +25,40 @@ export default function QuestionCard({
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          style={{ margin: "16px 0" }}
-        ></iframe>
+        />
       )}
       {video && (
-        <video
-          src={video}
-          controls
-          style={{ maxWidth: "100%", maxHeight: 200, margin: "16px 0" }}
-        />
+        <video className="media" src={video} controls />
       )}
       {image && (
-        <img
-          src={image}
-          alt="question visual"
-          style={{ maxWidth: "100%", maxHeight: 150, marginBottom: 16 }}
-        />
+        <img className="question-image" src={image} alt="question visual" />
       )}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "12px",
-          margin: "20px 0",
-        }}
-      >
+
+      <div className="options-grid">
         {options.map((option) => {
-          let bgColor = "";
-          if (selectedOption === option && answerStatus === "correct") {
-            bgColor = "green";
-          } else if (selectedOption === option && answerStatus === "incorrect") {
-            bgColor = "red";
-          }
+          const isSelected = selectedOption === option;
+          const isUsed = incorrectOptions.includes(option);
+
+          let className = "option-btn";
+          if (isSelected && answerStatus === "correct") className += " correct";
+          if (isSelected && answerStatus === "incorrect") className += " incorrect";
+          if (isUsed) className += " used";
+
           return (
             <button
               key={option}
+              className={className}
               onClick={() => handleAnswer(option)}
-              disabled={disableOptions || incorrectOptions.includes(option)}
-              style={{
-                backgroundColor: bgColor || undefined,
-                color: bgColor ? "#fff" : undefined,
-                opacity: incorrectOptions.includes(option) ? 0.5 : 1,
-                transition: "background-color 0.2s, opacity 0.2s",
-              }}
+              disabled={disableOptions || isUsed}
             >
               {option}
             </button>
           );
         })}
       </div>
+
       {feedback && (
-        <div style={{ margin: "10px", fontWeight: "bold" }}>
-          {feedback}
-        </div>
+        <p className={`feedback ${answerStatus || ''}`}>{feedback}</p>
       )}
     </div>
   );

@@ -1,9 +1,6 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 import QuestionCard from './QuestionCard.jsx'
-
 
 const questions = [
   {
@@ -41,15 +38,22 @@ export default function App() {
   const [feedback, setFeedback] = useState("");
   const [disableOptions, setDisableOptions] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [answerStatus, setAnswerStatus] = useState(null); // 'correct' | 'incorrect' | null
-  const [incorrectOptions, setIncorrectOptions] = useState([]); // NEW
+  const [answerStatus, setAnswerStatus] = useState(null);
+  const [incorrectOptions, setIncorrectOptions] = useState([]);
   const [isFirstTry, setIsFirstTry] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('theme') === 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
 
   function handleAnswer(option) {
     if (disableOptions) return;
     setSelectedOption(option);
     if (option === questions[current].answer) {
-      // Only count as correct if it was the first try for this question
       if (isFirstTry) {
         setScore(score + 1);
       }
@@ -59,8 +63,8 @@ export default function App() {
       setTimeout(() => {
         setAnswerStatus(null);
         setSelectedOption(null);
-        setIncorrectOptions([]); // RESET for next question
-        setIsFirstTry(true); // reset first-try flag for next question
+        setIncorrectOptions([]);
+        setIsFirstTry(true);
         const next = current + 1;
         if (next < questions.length) {
           setCurrent(next);
@@ -74,8 +78,8 @@ export default function App() {
       setFeedback("Incorrect, try again!");
       setAnswerStatus("incorrect");
       setDisableOptions(true);
-      setIncorrectOptions((prev) => [...prev, option]); // ADD to incorrect options
-      setIsFirstTry(false); // mark that the user missed the first try
+      setIncorrectOptions((prev) => [...prev, option]);
+      setIsFirstTry(false);
       setTimeout(() => {
         setAnswerStatus(null);
         setSelectedOption(null);
@@ -92,41 +96,50 @@ export default function App() {
     setDisableOptions(false);
     setSelectedOption(null);
     setAnswerStatus(null);
-    setIncorrectOptions([]); // RESET on restart
+    setIncorrectOptions([]);
     setIsFirstTry(true);
   }
 
+  const progress = (current / questions.length) * 100;
+
   return (
-    <div>
+    <div className="app">
+      <button
+        className="theme-toggle"
+        onClick={() => setDarkMode(!darkMode)}
+        aria-label="Toggle dark mode"
+      >
+        {darkMode ? 'Light' : 'Dark'}
+      </button>
+
       {!showResult && (
-        <button
-          className="quit-btn"
-          onClick={restartQuiz}
-          style={{
-            position: "fixed",
-            left: 20,
-            top: 20,
-            background: "#f44336",
-            color: "#fff",
-            border: "none",
-            padding: "0.5em 1em",
-            borderRadius: "6px",
-            cursor: "pointer",
-            fontWeight: "bold",
-            zIndex: 1000,
-          }}
-        >
-          Restart Quiz
+        <button className="quit-btn" onClick={restartQuiz}>
+          Restart
         </button>
       )}
-      <div style={{ maxWidth: 400, margin: "auto", textAlign: "center", position: "relative" }}>
-        <h1>French Quiz</h1>
+
+      <div className="card">
+        <h1 className="app-title">French Quiz</h1>
+
+        {!showResult && (
+          <div className="progress-section">
+            <div className="progress-bar-track">
+              <div className="progress-bar-fill" style={{ width: `${progress}%` }} />
+            </div>
+            <p className="progress-label">Question {current + 1} of {questions.length}</p>
+          </div>
+        )}
+
         {showResult ? (
-          <div>
-            <h2>
-              You scored {score} out of {questions.length}
-            </h2>
-            <button onClick={restartQuiz}>Restart Quiz</button>
+          <div className="results">
+            <h2 className="results-title">Quiz Complete!</h2>
+            <p className="results-score">
+              You scored <span className="score-highlight">{score}</span> out of{' '}
+              <span className="score-highlight">{questions.length}</span>
+            </p>
+            <button className="play-again-btn" onClick={restartQuiz}>
+              Play Again
+            </button>
           </div>
         ) : (
           <QuestionCard
@@ -140,7 +153,6 @@ export default function App() {
             disableOptions={disableOptions}
             handleAnswer={handleAnswer}
             feedback={feedback}
-            onRestart={restartQuiz}
           />
         )}
       </div>

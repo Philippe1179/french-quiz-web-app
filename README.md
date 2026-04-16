@@ -1,49 +1,29 @@
 # French Quiz Web App
 
-This project is a small React-based web application designed to help English speakers practice basic French vocabulary through an interactive quiz.
+**Live Demo:** https://Philippe1179.github.io/french-quiz-web-app/
 
-## Overview
-The app presents simple French quiz questions and provides immediate feedback to help users reinforce vocabulary and comprehension. It is lightweight, beginner-friendly, and easy to run locally.
+A small interactive React app that helps English speakers practice basic French vocabulary through a multiple choice quiz with instant feedback.
 
 ## Features
-- Interactive French vocabulary quiz
-- Immediate feedback on answers
-- Clean and simple user interface
-- Beginner-focused content
+- Multiple choice questions with instant right/wrong feedback
+- First-try scoring — points only awarded if you answer correctly on the first attempt
+- Wrong answers are eliminated so you can narrow down the correct one
+- Restart the quiz at any time
 
 ## Tech Stack
-- React
-- JavaScript
-- HTML
-- CSS
+- React 19
 - Vite
-- npm
+- JavaScript
+- CSS
+- GitHub Pages (CI/CD via GitHub Actions)
 
-## How to Run the App
+## Run Locally
 
-1. **Clone the repository**  
-   `git clone https://github.com/Philippe1179/french-quiz-web-app.git`  
-   `cd french-quiz-web-app`
+```bash
+git clone https://github.com/Philippe1179/french-quiz-web-app.git
+cd french-quiz-web-app
+npm install
+npm run dev
+```
 
-2. **Install dependencies**  
-   `npm install`
-
-3. **Start the development server**  
-   `npm run dev`
-
-4. **Open the app in your browser**  
-   Go to: `http://localhost:5173`
-
-## Purpose
-- This project was built to practice front-end development using React and to explore interactive ways of supporting French language learning.
-
-## Future Improvements
-- Add more quiz questions
-- Track user scores
-- Add difficulty levels
-- Improve mobile responsiveness
-
-
-
-
-
+Then open `http://localhost:5173`

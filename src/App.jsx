@@ -6,6 +6,8 @@ import GameMenu from './components/GameMenu.jsx'
 import Flashcards from './components/Flashcards.jsx'
 import Matching from './components/Matching.jsx'
 import WordScramble from './components/WordScramble.jsx'
+import LessonMenu from './components/LessonMenu.jsx'
+import Lesson from './components/Lesson.jsx'
 
 export default function App() {
   const [page, setPage] = useState('home');
@@ -32,6 +34,8 @@ export default function App() {
       {page === 'flashcards' && <Flashcards navigate={setPage} />}
       {page === 'matching' && <Matching navigate={setPage} />}
       {page === 'scramble' && <WordScramble navigate={setPage} />}
+      {page === 'lessons' && <LessonMenu navigate={setPage} />}
+      {page.startsWith('lesson:') && <Lesson navigate={setPage} lessonId={page.replace('lesson:', '')} />}
     </div>
   );
 }

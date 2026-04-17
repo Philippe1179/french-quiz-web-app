@@ -419,9 +419,12 @@
   flex-shrink: 0;
 }
 
-.section-icon.blue { background: var(--primary); }
-.section-icon.red  { background: var(--accent); }
-.section-icon.gray { background: var(--text-secondary); }
+.section-icon.blue   { background: var(--primary); }
+.section-icon.red    { background: var(--accent); }
+.section-icon.green  { background: var(--success); }
+.section-icon.orange { background: #f97316; }
+.section-icon.purple { background: #7c3aed; }
+.section-icon.gray   { background: var(--text-secondary); }
 
 .section-info {
   flex: 1;
@@ -553,6 +556,91 @@
 .known-btn:hover {
   opacity: 0.85;
   transform: scale(1.02);
+}
+
+/* --- Lessons --- */
+.lesson-done {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.lesson-card {
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.lesson-french {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+
+.lesson-english {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.lesson-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.75rem 0 1rem;
+}
+
+.lesson-example {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.lesson-example-translation {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.lesson-nav {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.lesson-nav-btn {
+  flex: 1;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1.5px solid var(--btn-border);
+  border-radius: 10px;
+  padding: 0.75em 1em;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.lesson-nav-btn.primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.lesson-nav-btn:hover:not(:disabled) {
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.lesson-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 
 /* --- Matching game --- */

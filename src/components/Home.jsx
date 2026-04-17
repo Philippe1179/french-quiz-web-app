@@ -25,13 +25,13 @@ export default function Home({ navigate }) {
           <span className="section-arrow">&#8250;</span>
         </div>
 
-        <div className="section-card disabled">
-          <div className="section-icon gray">L</div>
+        <div className="section-card" onClick={() => navigate('lessons')}>
+          <div className="section-icon green">L</div>
           <div className="section-info">
             <h2>Lessons</h2>
             <p>Guided vocabulary lessons</p>
           </div>
-          <span className="section-badge">Soon</span>
+          <span className="section-arrow">&#8250;</span>
         </div>
       </div>
     </div>

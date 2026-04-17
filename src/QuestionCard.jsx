@@ -35,7 +35,7 @@ export default function QuestionCard({
       )}
 
       <div className="options-grid">
-        {options.map((option) => {
+        {options.map((option, index) => {
           const isSelected = selectedOption === option;
           const isUsed = incorrectOptions.includes(option);
 
@@ -51,6 +51,7 @@ export default function QuestionCard({
               onClick={() => handleAnswer(option)}
               disabled={disableOptions || isUsed}
             >
+              <span className="option-key">{index + 1}</span>
               {option}
             </button>
           );

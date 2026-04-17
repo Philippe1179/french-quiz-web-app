@@ -48,6 +48,18 @@ export default function App() {
     }
   }, [showResult]);
 
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (showResult || disableOptions) return;
+      const index = ['1', '2', '3', '4'].indexOf(e.key);
+      if (index !== -1 && shuffledQuestions[current].options[index]) {
+        handleAnswer(shuffledQuestions[current].options[index]);
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [showResult, disableOptions, current, shuffledQuestions]);
+
   function handleAnswer(option) {
     if (disableOptions) return;
     setSelectedOption(option);

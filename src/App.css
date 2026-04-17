@@ -136,6 +136,7 @@
 }
 
 .option-btn {
+  position: relative;
   background: var(--btn-bg);
   color: var(--btn-text);
   border: 1.5px solid var(--btn-border);
@@ -146,6 +147,16 @@
   font-weight: 500;
   cursor: pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s, opacity 0.2s;
+}
+
+.option-key {
+  position: absolute;
+  top: 5px;
+  left: 7px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  line-height: 1;
 }
 
 .option-btn:hover:not(:disabled) {

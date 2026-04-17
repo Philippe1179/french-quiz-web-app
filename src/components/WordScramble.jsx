@@ -37,7 +37,8 @@ function getWords() {
 }
 
 export default function WordScramble({ navigate }) {
-  const [words] = useState(() => getWords());
+  const [mode, setMode] = useState(null);
+  const [words, setWords] = useState(() => getWords());
   const [current, setCurrent] = useState(0);
   const [input, setInput] = useState('');
   const [status, setStatus] = useState(null);
@@ -46,8 +47,8 @@ export default function WordScramble({ navigate }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    if (!done && status === null) inputRef.current?.focus();
-  }, [current, status, done]);
+    if (mode && !done && status === null) inputRef.current?.focus();
+  }, [current, status, done, mode]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -69,11 +70,17 @@ export default function WordScramble({ navigate }) {
   }
 
   function restart() {
+    setWords(getWords());
     setCurrent(0);
     setInput('');
     setStatus(null);
     setScore(0);
     setDone(false);
+  }
+
+  function changeMode() {
+    restart();
+    setMode(null);
   }
 
   const word = words[current];
@@ -88,7 +95,21 @@ export default function WordScramble({ navigate }) {
       <div className="card">
         <h1 className="app-title">Word Scramble</h1>
 
-        {!done ? (
+        {!mode ? (
+          <div className="mode-select">
+            <p className="game-instructions">Choose a difficulty to start.</p>
+            <div className="mode-cards">
+              <div className="mode-card" onClick={() => setMode('easy')}>
+                <p className="mode-title">Easy</p>
+                <p className="mode-desc">Scrambled letters are shown as a hint</p>
+              </div>
+              <div className="mode-card" onClick={() => setMode('hard')}>
+                <p className="mode-title">Hard</p>
+                <p className="mode-desc">No hint — type the French word from memory</p>
+              </div>
+            </div>
+          </div>
+        ) : !done ? (
           <>
             <div className="progress-section">
               <div className="progress-bar-track">
@@ -98,7 +119,7 @@ export default function WordScramble({ navigate }) {
             </div>
 
             <p className="scramble-hint">English: <strong>{word.english}</strong></p>
-            <p className="scramble-word">{word.scrambled}</p>
+            {mode === 'easy' && <p className="scramble-word">{word.scrambled}</p>}
 
             <form className="scramble-form" onSubmit={handleSubmit}>
               <input
@@ -139,7 +160,7 @@ export default function WordScramble({ navigate }) {
             {score === words.length && <p className="perfect">Perfect score!</p>}
             <div className="results-actions">
               <button className="play-again-btn" onClick={restart}>Play Again</button>
-              <button className="home-btn" onClick={() => navigate('games')}>Games</button>
+              <button className="home-btn" onClick={changeMode}>Change Mode</button>
             </div>
           </div>
         )}

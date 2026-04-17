@@ -622,6 +622,44 @@
   margin-top: 0.5rem;
 }
 
+/* --- Mode select --- */
+.mode-select {
+  padding: 0.5rem 0;
+}
+
+.mode-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 0.5rem;
+}
+
+.mode-card {
+  background: var(--btn-bg);
+  border: 1.5px solid var(--btn-border);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+}
+
+.mode-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.mode-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.mode-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
 /* --- Word Scramble --- */
 .scramble-hint {
   text-align: center;

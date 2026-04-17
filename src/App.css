@@ -219,6 +219,19 @@
   font-size: 1.25em;
 }
 
+.new-best {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--success);
+  margin-bottom: 0.4rem;
+}
+
+.high-score {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
 .play-again-btn {
   background: var(--primary);
   color: #fff;

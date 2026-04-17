@@ -30,6 +30,7 @@ export default function App() {
   const [incorrectOptions, setIncorrectOptions] = useState([]);
   const [isFirstTry, setIsFirstTry] = useState(true);
   const [shuffledQuestions, setShuffledQuestions] = useState(() => getShuffledQuestions());
+  const [highScore, setHighScore] = useState(() => parseInt(localStorage.getItem('highScore') || '0'));
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark';
   });
@@ -38,6 +39,13 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
+
+  useEffect(() => {
+    if (showResult && score > highScore) {
+      setHighScore(score);
+      localStorage.setItem('highScore', score);
+    }
+  }, [showResult]);
 
   function handleAnswer(option) {
     if (disableOptions) return;
@@ -127,6 +135,12 @@ export default function App() {
               You scored <span className="score-highlight">{score}</span> out of{' '}
               <span className="score-highlight">{shuffledQuestions.length}</span>
             </p>
+            {score === highScore && score > 0 && (
+              <p className="new-best">New best!</p>
+            )}
+            {highScore > 0 && (
+              <p className="high-score">Best score: {highScore} / {shuffledQuestions.length}</p>
+            )}
             <button className="play-again-btn" onClick={restartQuiz}>
               Play Again
             </button>

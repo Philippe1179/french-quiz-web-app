@@ -10,6 +10,14 @@ function shuffleArray(arr) {
   return shuffled;
 }
 
+function normalize(str) {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim();
+}
+
 function scrambleWord(word) {
   const letters = word.split('');
   let result;
@@ -44,7 +52,7 @@ export default function WordScramble({ navigate }) {
   function handleSubmit(e) {
     e.preventDefault();
     if (status || done) return;
-    const correct = input.trim().toLowerCase() === words[current].french.toLowerCase();
+    const correct = normalize(input) === normalize(words[current].french);
     setStatus(correct ? 'correct' : 'incorrect');
     if (correct) setScore((s) => s + 1);
     setTimeout(advance, 1200);

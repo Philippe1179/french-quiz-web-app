@@ -29,6 +29,7 @@ export default function App() {
   const [answerStatus, setAnswerStatus] = useState(null);
   const [incorrectOptions, setIncorrectOptions] = useState([]);
   const [isFirstTry, setIsFirstTry] = useState(true);
+  const [missedQuestions, setMissedQuestions] = useState([]);
   const [shuffledQuestions, setShuffledQuestions] = useState(() => getShuffledQuestions());
   const [highScore, setHighScore] = useState(() => parseInt(localStorage.getItem('highScore') || '0'));
   const [darkMode, setDarkMode] = useState(() => {
@@ -53,6 +54,11 @@ export default function App() {
     if (option === shuffledQuestions[current].answer) {
       if (isFirstTry) {
         setScore(score + 1);
+      } else {
+        setMissedQuestions((prev) => [
+          ...prev,
+          { question: shuffledQuestions[current].question, answer: shuffledQuestions[current].answer },
+        ]);
       }
       setFeedback("Correct!");
       setAnswerStatus("correct");
@@ -95,6 +101,7 @@ export default function App() {
     setAnswerStatus(null);
     setIncorrectOptions([]);
     setIsFirstTry(true);
+    setMissedQuestions([]);
     setShuffledQuestions(getShuffledQuestions());
   }
 
@@ -140,6 +147,21 @@ export default function App() {
             )}
             {highScore > 0 && (
               <p className="high-score">Best score: {highScore} / {shuffledQuestions.length}</p>
+            )}
+            {missedQuestions.length === 0 ? (
+              <p className="perfect">Perfect score! Excellent work.</p>
+            ) : (
+              <div className="breakdown">
+                <p className="breakdown-title">Questions you missed:</p>
+                <ul className="breakdown-list">
+                  {missedQuestions.map((q, i) => (
+                    <li key={i} className="breakdown-item">
+                      <span className="breakdown-question">{q.question}</span>
+                      <span className="breakdown-answer">Answer: {q.answer}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
             <button className="play-again-btn" onClick={restartQuiz}>
               Play Again

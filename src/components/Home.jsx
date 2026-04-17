@@ -7,11 +7,11 @@ export default function Home({ navigate }) {
       </div>
 
       <div className="section-cards">
-        <div className="section-card" onClick={() => navigate('quiz')}>
-          <div className="section-icon blue">Q</div>
+        <div className="section-card" onClick={() => navigate('lessons')}>
+          <div className="section-icon green">L</div>
           <div className="section-info">
-            <h2>Quiz</h2>
-            <p>Test your French vocabulary</p>
+            <h2>Lessons</h2>
+            <p>Guided vocabulary lessons</p>
           </div>
           <span className="section-arrow">&#8250;</span>
         </div>
@@ -25,11 +25,11 @@ export default function Home({ navigate }) {
           <span className="section-arrow">&#8250;</span>
         </div>
 
-        <div className="section-card" onClick={() => navigate('lessons')}>
-          <div className="section-icon green">L</div>
+        <div className="section-card" onClick={() => navigate('quiz')}>
+          <div className="section-icon blue">Q</div>
           <div className="section-info">
-            <h2>Lessons</h2>
-            <p>Guided vocabulary lessons</p>
+            <h2>Quiz</h2>
+            <p>Test your French vocabulary</p>
           </div>
           <span className="section-arrow">&#8250;</span>
         </div>

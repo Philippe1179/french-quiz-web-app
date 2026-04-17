@@ -555,6 +555,124 @@
   transform: scale(1.02);
 }
 
+/* --- Matching game --- */
+.game-instructions {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.matching-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.matching-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.match-item {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1.5px solid var(--btn-border);
+  border-radius: 10px;
+  padding: 0.7em 0.4em;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  text-align: center;
+}
+
+.match-item:hover:not(:disabled) {
+  border-color: var(--primary);
+  transform: scale(1.02);
+}
+
+.match-item.selected {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.match-item.matched {
+  background: var(--success);
+  color: #fff;
+  border-color: var(--success);
+  opacity: 0.8;
+  cursor: default;
+}
+
+.match-item.incorrect {
+  background: var(--error);
+  color: #fff;
+  border-color: var(--error);
+}
+
+.game-stat {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* --- Word Scramble --- */
+.scramble-hint {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.scramble-word {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.scramble-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.scramble-input {
+  width: 100%;
+  padding: 0.75em 1em;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  border: 1.5px solid var(--btn-border);
+  border-radius: 10px;
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.scramble-input:focus {
+  border-color: var(--primary);
+}
+
+.scramble-input.correct {
+  border-color: var(--success);
+}
+
+.scramble-input.incorrect {
+  border-color: var(--error);
+}
+
 .flashcard-key-hint {
   text-align: center;
   font-size: 0.78rem;

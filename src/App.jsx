@@ -4,6 +4,8 @@ import Home from './components/Home.jsx'
 import Quiz from './components/Quiz.jsx'
 import GameMenu from './components/GameMenu.jsx'
 import Flashcards from './components/Flashcards.jsx'
+import Matching from './components/Matching.jsx'
+import WordScramble from './components/WordScramble.jsx'
 
 export default function App() {
   const [page, setPage] = useState('home');
@@ -28,6 +30,8 @@ export default function App() {
       {page === 'quiz' && <Quiz navigate={setPage} />}
       {page === 'games' && <GameMenu navigate={setPage} />}
       {page === 'flashcards' && <Flashcards navigate={setPage} />}
+      {page === 'matching' && <Matching navigate={setPage} />}
+      {page === 'scramble' && <WordScramble navigate={setPage} />}
     </div>
   );
 }

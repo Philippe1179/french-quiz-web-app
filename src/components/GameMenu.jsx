@@ -18,22 +18,22 @@ export default function GameMenu({ navigate }) {
             <span className="section-arrow">&#8250;</span>
           </div>
 
-          <div className="section-card disabled">
+          <div className="section-card" onClick={() => navigate('matching')}>
             <div className="section-icon red">M</div>
             <div className="section-info">
               <h2>Matching</h2>
               <p>Match French words to their meanings</p>
             </div>
-            <span className="section-badge">Soon</span>
+            <span className="section-arrow">&#8250;</span>
           </div>
 
-          <div className="section-card disabled">
+          <div className="section-card" onClick={() => navigate('scramble')}>
             <div className="section-icon gray">S</div>
             <div className="section-info">
               <h2>Word Scramble</h2>
               <p>Unscramble the French word</p>
             </div>
-            <span className="section-badge">Soon</span>
+            <span className="section-arrow">&#8250;</span>
           </div>
         </div>
       </div>

@@ -710,6 +710,63 @@
   margin-top: 0.5rem;
 }
 
+/* --- Matching levels --- */
+.level-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.level-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1.5px solid var(--btn-border);
+  border-radius: 12px;
+  padding: 0.9em 1em;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s;
+  text-align: left;
+}
+
+.level-item:hover:not(:disabled) {
+  border-color: var(--primary);
+  transform: scale(1.01);
+}
+
+.level-item.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.level-number {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary);
+  min-width: 55px;
+}
+
+.level-title {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.level-lock {
+  font-size: 1rem;
+}
+
+.unlock-msg {
+  text-align: center;
+  color: var(--success);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0.5rem 0;
+}
+
 /* --- Mode select --- */
 .mode-select {
   padding: 0.5rem 0;
